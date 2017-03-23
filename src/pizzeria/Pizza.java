@@ -8,8 +8,7 @@ public class Pizza {
     private double Total;
 
     private Map<String, Double> precioTipoMasa;
-    private String tipoMasa;
-
+    private String tipoMasa = "";
     private Map<String, Double> tipoPizza;
 
     private Map<String,Double> ingredientesExtra;
@@ -39,14 +38,32 @@ public class Pizza {
         this.tamaño.put("familiar", 1.30);
     }
 
-    public double getTotal() {
-        
+    public double setTipoMasa(String tipo){
+        this.tipoMasa=tipo;
+        return this.precioTipoMasa.get(tipo);
+    }
+    public double getTipoMasa(){  
+        return this.precioTipoMasa.get(this.tipoMasa);
+    }
+    
+    
+    public boolean existeTipoMasa(){
+        if(this.tipoMasa.isEmpty()){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public void setTotal(double numero){
+        this.Total=numero;
+    }
+    
+    public double getTotal() {        
         return Total;
     }
 
-    public void setTipoMasa(String tipo) {
-        this.precioTipoMasa.get(tipo);
-    }
+    
 
     
     

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="239.0" prefWidth="445.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pizzeria.FXMLDocumentController">
+   <children>
+      <ToggleButton fx:id="buttonFina" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="20.0" layoutY="48.0" mnemonicParsing="false" onAction="#masa" prefHeight="154.0" prefWidth="169.0" stylesheets="@css.css" text="MasaFina">
+         <font>
+            <Font name="DejaVu Sans Condensed Bold" size="15.0" />
+         </font>
+      </ToggleButton>
+      <ToggleButton fx:id="buttonGorda" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="247.0" layoutY="48.0" mnemonicParsing="false" onAction="#masa" prefHeight="154.0" prefWidth="169.0" stylesheets="@css.css" text="MasaGorda">
+         <font>
+            <Font name="DejaVu Sans Condensed Bold" size="15.0" />
+         </font>
+      </ToggleButton>
+   </children>
+</AnchorPane>

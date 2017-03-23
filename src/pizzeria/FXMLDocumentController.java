@@ -11,9 +11,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -22,17 +25,62 @@ import javafx.scene.input.MouseEvent;
 public class FXMLDocumentController implements Initializable {
 
     @FXML
-    private ImageView masaFina;
-    
-    
+    private ToggleButton buttonFina;
+    @FXML
+    private ToggleButton buttonGorda;
+    @FXML
+    private AnchorPane resultado;
+    @FXML
+    private Label resumenTipoMasa;
+    @FXML
+    private Label resumenNumeroPizza;
+    @FXML
+    private Label resumenTotal;
+
+    Pizza p;
+    @FXML
+    private Button siguiente;
+    @FXML
+    private Label resumenTipoPizza;
+    @FXML
+    private AnchorPane menuMasa;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
+        p = new Pizza();
+    }
 
     @FXML
-    private void masa(MouseEvent event) {
+    private void masa(ActionEvent event) {
+        if (event.getSource() == buttonGorda) {
+            elegirMasa("gruesa");
+
+        } else if (event.getSource() == buttonFina) {
+            elegirMasa("fina");
+        }
+    }
+
+    private void elegirMasa(String tipo) {
+        if (p.existeTipoMasa()) {
+            double total = Double.parseDouble(this.resumenTotal.getText());
+            double quitar = p.getTipoMasa();
+            this.resumenTotal.setText(String.valueOf(total - quitar));
+            sumarMasa(tipo);
+        } else {
+            sumarMasa(tipo);
+        }
+    }
+
+    private void sumarMasa(String tipo) {
+        double total = Double.parseDouble(this.resumenTotal.getText());
+        double dinero = p.setTipoMasa(tipo);
+        this.resumenTotal.setText(String.valueOf(total + dinero));
+        this.resumenTipoMasa.setText("Tipo de masa: " + tipo);
+    }
+
+    @FXML
+    private void siguiente(ActionEvent event){
+        this.menuMasa.setVisible(false);
         
     }
-    
 }
