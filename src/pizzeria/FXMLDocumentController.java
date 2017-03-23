@@ -29,25 +29,36 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private ToggleButton buttonGorda;
     @FXML
-    private AnchorPane resultado;
-    @FXML
     private Label resumenTipoMasa;
-    @FXML
-    private Label resumenNumeroPizza;
     @FXML
     private Label resumenTotal;
 
     Pizza p;
     @FXML
+    private AnchorPane menuMasa;
+    @FXML
     private Button siguiente;
+    @FXML
+    private AnchorPane resultado;
+    @FXML
+    private Label resumenNumeroPizza;
     @FXML
     private Label resumenTipoPizza;
     @FXML
-    private AnchorPane menuMasa;
+    private AnchorPane menuTipoPizza;
+    @FXML
+    private ToggleButton pizzaBasica;
+    @FXML
+    private ToggleButton pizzaCuatroQuesos;
+    @FXML
+    private ToggleButton pizzaBarbacoa;
+    @FXML
+    private ToggleButton pizzaMexicana;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         p = new Pizza();
+
     }
 
     @FXML
@@ -58,6 +69,12 @@ public class FXMLDocumentController implements Initializable {
         } else if (event.getSource() == buttonFina) {
             elegirMasa("fina");
         }
+    }
+
+    @FXML
+    private void siguienteMasa(ActionEvent event) {
+        this.menuMasa.setVisible(false);
+        this.menuTipoPizza.setVisible(true);
     }
 
     private void elegirMasa(String tipo) {
@@ -78,9 +95,4 @@ public class FXMLDocumentController implements Initializable {
         this.resumenTipoMasa.setText("Tipo de masa: " + tipo);
     }
 
-    @FXML
-    private void siguiente(ActionEvent event){
-        this.menuMasa.setVisible(false);
-        
-    }
 }
