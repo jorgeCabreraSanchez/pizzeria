@@ -1,51 +1,48 @@
 package pizzeria;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Pizza {
 
-    private double Total;
-
+    private double Total = 0.0;
     private String tipoMasa = "";
     private String tipoPizza = "";
-
+    private Set<String> ingredientes = new HashSet<>();
     public Pizza() {
 
     }
 
     public Double setTipoMasa(String tipo) {
-        this.tipoMasa = tipo;
-        return Precios.precioTipoMasa.get(tipo);
+        if(this.tipoMasa.isEmpty()){           
+            return sumarTipoMasa(tipo);
+        } else {
+            this.Total-=Precios.precioTipoMasa.get(this.tipoMasa);
+            return sumarTipoMasa(tipo);
+        }
     }
 
-    public double getTipoMasa() {
-        return Precios.precioTipoMasa.get(this.tipoMasa);
+    private Double sumarTipoMasa(String tipo){
+        this.tipoMasa=tipo;
+        this.Total+=Precios.precioTipoMasa.get(tipo);
+        return this.Total;
     }
 
     public double setTipoPizza(String tipo) {
-        this.tipoPizza = tipo;
-        return Precios.tiposPizza.get(tipo);
-    }
-
-//    public double getTipoPizza() {
-//        
-//    }
-
-    public boolean existeTipoMasa() {
-        if (this.tipoMasa.isEmpty()) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public boolean existeTipoPizza() {
         if (this.tipoPizza.isEmpty()) {
-            return false;
+            return sumarTipoPizza(tipo);
         } else {
-            return true;
+            this.Total -= Precios.tiposPizza.get(this.tipoPizza);
+            return sumarTipoPizza(tipo);
         }
+    }
+
+    private Double sumarTipoPizza(String tipo) {
+        this.tipoPizza = tipo;
+        this.Total += Precios.tiposPizza.get(tipo);
+        return this.Total;
     }
 
     public void setTotal(double numero) {

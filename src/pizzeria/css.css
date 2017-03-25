@@ -15,24 +15,92 @@ and open the template in the editor.
     -fx-background-image: url("images/masaGruesa.jpg");
     -fx-background-size: stretch;
 }
+
 #pizzaBasica{
     -fx-background-image: url("images/pizzaBasica.jpg");
     -fx-background-size: stretch;
+}
+#pizzaBasica:focused{
+    -fx-border-color: #7990e7;
+    -fx-border-width: 2px;
 }
 #pizzaCuatroQuesos{
     -fx-background-image: url("images/pizzaCuatroQuesos.png");
     -fx-background-size: stretch;
 }
+#pizzaCuatroQuesos:focused{
+    -fx-border-color: #7990e7;
+    -fx-border-width: 2px;
+}
 #pizzaBarbacoa{
     -fx-background-image: url("images/pizzaBarbacoa.png");
     -fx-background-size: stretch;
+}
+#pizzaBarbacoa:focused{
+    -fx-border-color: #7990e7;
+    -fx-border-width: 2px;
 }
 #pizzaMexicana{
     -fx-background-image: url("images/pizzaMexicana.png");
     -fx-background-size: stretch;
 }
+#pizzaMexicana:focused{
+    -fx-border-color: #7990e7;
+    -fx-border-width: 2px;
+}
+
 #resultado{
     -fx-background-color: #e9f3ff;
     -fx-border-color: #82b8f8;
+    -fx-border-width: 2px;
+}
+
+#ingredienteJamonImagen{
+    -fx-background-image: url("images/ingredienteJamon.jpg");
+    -fx-background-size: stretch;
+}
+#ingredienteJamonImagen:focused{
+    -fx-border-color: #7990e7;
+    -fx-border-width: 2px;
+}
+#ingredienteQuesoImagen{
+    -fx-background-image: url("images/ingredienteQueso1.jpg");
+    -fx-background-size: stretch;
+}
+#ingredienteQuesoImagen:focused{
+    -fx-border-color: #7990e7;
+    -fx-border-width: 2px;
+}
+#ingredienteOlivasImagen{
+    -fx-background-image: url("images/ingredienteOlivas.jpg");
+    -fx-background-size: stretch;
+}
+#ingredienteOlivasImagen:focused{
+    -fx-border-color: #7990e7;
+    -fx-border-width: 2px;
+}
+#ingredienteTomateImagen{   
+    -fx-background-image: url("images/ingredienteTomate.jpg");
+    -fx-background-size: stretch;
+}
+#ingredienteTomate:selected{
+    -fx-border-color: #7990e7;
+    -fx-border-width: 30px;
+}
+#ingredienteCebollaImagen{
+    -fx-background-image: url("images/ingredienteCebolla.png");
+    -fx-background-size: stretch;
+    -fx-background-color: white;
+
+}
+#ingredienteCebollaImagen:selected{   
+        -fx-border-color: #7990e7;
+        -fx-border-width: 30px; 
+}
+#sinIngredientesImagen{
+    -fx-background-color: white;
+}
+#sinIngredientes:selected{
+    -fx-border-color: #7990e7;
     -fx-border-width: 2px;
 }
