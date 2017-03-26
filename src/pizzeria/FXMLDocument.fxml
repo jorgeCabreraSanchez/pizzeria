@@ -25,21 +25,23 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="resumenTipoMasa" layoutX="14.0" layoutY="24.0" prefHeight="17.0" prefWidth="308.0" text="asd" />
-            <Label layoutX="371.0" layoutY="32.0" text="TOTAL">
+            <Label layoutX="371.0" layoutY="43.0" text="TOTAL">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="resumenTotal" layoutX="371.0" layoutY="51.0" prefHeight="27.0" prefWidth="55.0" text="0">
+            <Label fx:id="resumenTotal" layoutX="364.0" layoutY="59.0" prefHeight="27.0" prefWidth="55.0" text="0">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="resumenTipoPizza" layoutX="14.0" layoutY="43.0" prefHeight="17.0" prefWidth="308.0" text="asd" />
+            <Label fx:id="resumenTipoMasa" layoutX="14.0" layoutY="24.0" prefHeight="17.0" prefWidth="308.0" />
+            <Label fx:id="resumenTipoPizza" layoutX="14.0" layoutY="48.0" prefHeight="17.0" prefWidth="308.0" />
+            <Label fx:id="resumenIngredientes" layoutX="14.0" layoutY="72.0" prefHeight="17.0" prefWidth="308.0" />
+            <Label fx:id="resumenTamaño" layoutX="14.0" layoutY="96.0" prefHeight="17.0" prefWidth="308.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuMasa" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="445.0" visible="false">
+      <AnchorPane fx:id="menuMasa" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0" visible="false">
          <children>
             <ToggleButton fx:id="buttonFina" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#masa" prefHeight="154.0" prefWidth="169.0" stylesheets="@css.css" text="MasaFina">
                <font>
@@ -57,7 +59,7 @@
             <Button fx:id="siguienteMasa" layoutX="348.0" layoutY="174.0" mnemonicParsing="false" onAction="#siguienteMasa" prefHeight="28.0" prefWidth="76.0" text="--&gt;" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuTipoPizza" layoutX="60.0" layoutY="81.0" prefHeight="216.0" prefWidth="445.0" visible="false">
+      <AnchorPane fx:id="menuTipoPizza" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0" visible="false">
          <children>
             <ToggleButton fx:id="pizzaBasica" layoutX="18.0" layoutY="8.0" mnemonicParsing="false" onAction="#tipoPizza" prefHeight="77.0" prefWidth="155.0" stylesheets="@css.css">
                <toggleGroup>
@@ -90,21 +92,43 @@
             <Button fx:id="volverPizza" layoutY="186.0" mnemonicParsing="false" onAction="#volverPizza" prefHeight="27.0" prefWidth="55.0" text="&lt;--" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuIngredientes" layoutX="26.0" layoutY="69.0" prefHeight="216.0" prefWidth="445.0">
+      <AnchorPane fx:id="menuIngredientes" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0">
          <children>
             <Button fx:id="volverIngredientes" layoutY="190.0" mnemonicParsing="false" onAction="#volverIngredientes" text="&lt;--" />
-            <RadioButton fx:id="sinIngredientes" layoutX="41.0" layoutY="14.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" />
-            <ToggleButton fx:id="sinIngredientesImagen" layoutX="41.0" layoutY="14.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" text="Sin Ingredientes" />
-            <RadioButton fx:id="ingredienteJamon" layoutX="250.0" layoutY="14.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" />
-            <ToggleButton fx:id="ingredienteJamonImagen" layoutX="250.0" layoutY="14.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" />
-            <RadioButton fx:id="ingredienteQueso" layoutX="41.0" layoutY="73.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" />
-            <ToggleButton fx:id="ingredienteQuesoImagen" layoutX="41.0" layoutY="73.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" />
-            <RadioButton fx:id="ingredienteOlivas" layoutX="250.0" layoutY="73.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" />
-            <ToggleButton fx:id="ingredienteOlivasImagen" layoutX="250.0" layoutY="73.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" />
-            <ToggleButton fx:id="ingredienteTomateImagen" layoutX="41.0" layoutY="133.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" />
-            <RadioButton fx:id="ingredienteTomate" layoutX="41.0" layoutY="133.0" mnemonicParsing="false" onAction="#ingredientes" opacity="0.6" prefHeight="48.0" prefWidth="155.0" />
-            <ToggleButton fx:id="ingredienteCebollaImagen" focusTraversable="false" layoutX="256.0" layoutY="133.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" />
-            <RadioButton fx:id="ingredienteCebolla" layoutX="256.0" layoutY="133.0" mnemonicParsing="false" onAction="#ingredientes" opacity="0.72" prefHeight="48.0" prefWidth="155.0" />
+            <CheckBox fx:id="sinIngredientes" layoutX="41.0" layoutY="14.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" text="Sin Ingredientes" />
+            <CheckBox fx:id="ingredienteJamon" layoutX="250.0" layoutY="14.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" />
+            <CheckBox fx:id="ingredienteQueso" layoutX="41.0" layoutY="70.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" />
+            <CheckBox fx:id="ingredienteOlivas" layoutX="250.0" layoutY="70.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" />
+            <CheckBox fx:id="ingredienteTomate" layoutX="41.0" layoutY="131.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" />
+            <CheckBox fx:id="ingredienteCebolla" layoutX="250.0" layoutY="131.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" />
+            <Button fx:id="siguienteIngredientes" layoutX="416.0" layoutY="190.0" mnemonicParsing="false" onAction="#siguienteIngredientes" text="--&gt;" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="menuTamaño" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0" stylesheets="@css.css" visible="false">
+         <children>
+            <ToggleButton fx:id="tamañoMediana" layoutX="157.0" layoutY="14.0" mnemonicParsing="false" onAction="#ponerTamaño" prefHeight="154.0" prefWidth="133.0" stylesheets="@css.css">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tamaño" />
+               </toggleGroup></ToggleButton>
+            <ToggleButton fx:id="tamañoFamiliar" layoutX="300.0" layoutY="14.0" mnemonicParsing="false" onAction="#ponerTamaño" prefHeight="154.0" prefWidth="133.0" stylesheets="@css.css" toggleGroup="$tamaño" />
+            <Text layoutX="48.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pequeña">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="191.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mediana">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Text>
+            <Text layoutX="335.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Familiar">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Text>
+            <ToggleButton fx:id="tamañoPequeña" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#ponerTamaño" prefHeight="154.0" prefWidth="133.0" stylesheets="@css.css" toggleGroup="$tamaño" />
+            <Button fx:id="volverTamaño" layoutY="195.0" mnemonicParsing="false" onAction="#volverTamaño" prefHeight="20.0" prefWidth="52.0" text="&lt;--" />
+            <Button fx:id="Terminar" layoutX="386.0" layoutY="195.0" mnemonicParsing="false" onAction="#terminar" prefHeight="25.0" prefWidth="65.0" text="Terminar" />
          </children>
       </AnchorPane>
    </children>

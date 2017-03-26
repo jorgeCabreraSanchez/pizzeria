@@ -15,12 +15,6 @@ import java.util.Map;
 public class Precios {
 
     public static  Map<String, Double> precioTipoMasa = new HashMap<>();
-
-    {
-        precioTipoMasa.put("fina", 9.00);
-        precioTipoMasa.put("gruesa", 9.50);
-    }
-
     static public Map<String, Double> tiposPizza = new HashMap<>();
     static public Map<String, Double> ingredientesExtra = new HashMap<>();
     static public Map<String, Double> tamaño = new HashMap<>();

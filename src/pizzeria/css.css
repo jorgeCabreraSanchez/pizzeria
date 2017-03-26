@@ -55,52 +55,45 @@ and open the template in the editor.
     -fx-border-width: 2px;
 }
 
-#ingredienteJamonImagen{
+#ingredienteJamon{
     -fx-background-image: url("images/ingredienteJamon.jpg");
     -fx-background-size: stretch;
+    -fx-background-color: white;
 }
-#ingredienteJamonImagen:focused{
-    -fx-border-color: #7990e7;
-    -fx-border-width: 2px;
-}
-#ingredienteQuesoImagen{
+#ingredienteQueso{
     -fx-background-image: url("images/ingredienteQueso1.jpg");
     -fx-background-size: stretch;
 }
-#ingredienteQuesoImagen:focused{
-    -fx-border-color: #7990e7;
-    -fx-border-width: 2px;
-}
-#ingredienteOlivasImagen{
+#ingredienteOlivas{
     -fx-background-image: url("images/ingredienteOlivas.jpg");
     -fx-background-size: stretch;
 }
-#ingredienteOlivasImagen:focused{
-    -fx-border-color: #7990e7;
-    -fx-border-width: 2px;
-}
-#ingredienteTomateImagen{   
+#ingredienteTomate{   
     -fx-background-image: url("images/ingredienteTomate.jpg");
     -fx-background-size: stretch;
 }
-#ingredienteTomate:selected{
-    -fx-border-color: #7990e7;
-    -fx-border-width: 30px;
-}
-#ingredienteCebollaImagen{
+
+#ingredienteCebolla{
     -fx-background-image: url("images/ingredienteCebolla.png");
     -fx-background-size: stretch;
     -fx-background-color: white;
 
 }
-#ingredienteCebollaImagen:selected{   
-        -fx-border-color: #7990e7;
-        -fx-border-width: 30px; 
-}
-#sinIngredientesImagen{
+#sinIngredientes{
     -fx-background-color: white;
 }
-#sinIngredientes:selected{
-    -fx-border-color: #7990e7;
-    -fx-border-width: 2px;
+
+#tamañoPequeña{
+    -fx-background-image: url("images/tamañoPequeña.png");
+    -fx-background-size: stretch;  
+    -fx-background-color: white;
+}
+#tamañoMediana{
+    -fx-background-image: url("images/tamañoMediano.png");
+    -fx-background-size: stretch;
+    -fx-background-color:black;
+}
+#tamañoFamiliar{
+    -fx-background-image: url("images/tamañoFamiliar.jpg");
+    -fx-background-size: stretch;
 }
