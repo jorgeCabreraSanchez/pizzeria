@@ -83,17 +83,17 @@ and open the template in the editor.
     -fx-background-color: white;
 }
 
-#tamañoPequeña{
+#tamanoPequeña{
     -fx-background-image: url("images/tamañoPequeña.png");
     -fx-background-size: stretch;  
     -fx-background-color: white;
 }
-#tamañoMediana{
+#tamanoMediana{
     -fx-background-image: url("images/tamañoMediano.png");
     -fx-background-size: stretch;
     -fx-background-color:black;
 }
-#tamañoFamiliar{
+#tamanoFamiliar{
     -fx-background-image: url("images/tamañoFamiliar.jpg");
     -fx-background-size: stretch;
 }

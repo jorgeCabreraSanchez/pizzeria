@@ -92,7 +92,7 @@
             <Button fx:id="volverPizza" layoutY="186.0" mnemonicParsing="false" onAction="#volverPizza" prefHeight="27.0" prefWidth="55.0" text="&lt;--" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuIngredientes" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0">
+      <AnchorPane fx:id="menuIngredientes" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0" visible="false">
          <children>
             <Button fx:id="volverIngredientes" layoutY="190.0" mnemonicParsing="false" onAction="#volverIngredientes" text="&lt;--" />
             <CheckBox fx:id="sinIngredientes" layoutX="41.0" layoutY="14.0" mnemonicParsing="false" onAction="#ingredientes" prefHeight="48.0" prefWidth="155.0" stylesheets="@css.css" text="Sin Ingredientes" />
@@ -104,13 +104,13 @@
             <Button fx:id="siguienteIngredientes" layoutX="416.0" layoutY="190.0" mnemonicParsing="false" onAction="#siguienteIngredientes" text="--&gt;" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuTamaño" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0" stylesheets="@css.css" visible="false">
+      <AnchorPane fx:id="menuTamaño" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0" stylesheets="@css.css">
          <children>
-            <ToggleButton fx:id="tamañoMediana" layoutX="157.0" layoutY="14.0" mnemonicParsing="false" onAction="#ponerTamaño" prefHeight="154.0" prefWidth="133.0" stylesheets="@css.css">
+            <ToggleButton fx:id="tamanoMediana" layoutX="157.0" layoutY="14.0" mnemonicParsing="false" onAction="#ponerTamaño" prefHeight="154.0" prefWidth="133.0" stylesheets="@css.css">
                <toggleGroup>
-                  <ToggleGroup fx:id="tamaño" />
+                  <ToggleGroup fx:id="tamano" />
                </toggleGroup></ToggleButton>
-            <ToggleButton fx:id="tamañoFamiliar" layoutX="300.0" layoutY="14.0" mnemonicParsing="false" onAction="#ponerTamaño" prefHeight="154.0" prefWidth="133.0" stylesheets="@css.css" toggleGroup="$tamaño" />
+            <ToggleButton fx:id="tamanoFamiliar" layoutX="300.0" layoutY="14.0" mnemonicParsing="false" onAction="#ponerTamaño" prefHeight="154.0" prefWidth="133.0" stylesheets="@css.css" toggleGroup="$tamano" />
             <Text layoutX="48.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pequeña">
                <font>
                   <Font name="System Bold Italic" size="16.0" />
@@ -126,7 +126,7 @@
                   <Font name="System Bold Italic" size="16.0" />
                </font>
             </Text>
-            <ToggleButton fx:id="tamañoPequeña" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#ponerTamaño" prefHeight="154.0" prefWidth="133.0" stylesheets="@css.css" toggleGroup="$tamaño" />
+            <ToggleButton fx:id="tamanoPequeña" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#ponerTamaño" prefHeight="154.0" prefWidth="133.0" stylesheets="@css.css" toggleGroup="$tamano" />
             <Button fx:id="volverTamaño" layoutY="195.0" mnemonicParsing="false" onAction="#volverTamaño" prefHeight="20.0" prefWidth="52.0" text="&lt;--" />
             <Button fx:id="Terminar" layoutX="386.0" layoutY="195.0" mnemonicParsing="false" onAction="#terminar" prefHeight="25.0" prefWidth="65.0" text="Terminar" />
          </children>

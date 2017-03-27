@@ -35,7 +35,6 @@ import javafx.scene.layout.AnchorPane;
 public class FXMLDocumentController implements Initializable {
 
     Pizza p;
-    Precios pre;
 
     @FXML
     private ToggleButton buttonFina;
@@ -95,20 +94,22 @@ public class FXMLDocumentController implements Initializable {
     private Label resumenTamaño;
     @FXML
     private AnchorPane menuTamaño;
-    @FXML
-    private ToggleButton tamañoPequeña;
-    @FXML
-    private ToggleGroup tamaño;
-    @FXML
-    private ToggleButton tamañoMediana;
-    @FXML
-    private ToggleButton tamañoFamiliar;
+
+
     @FXML
     private Button volverTamaño;
     @FXML
     private Button Terminar;
     @FXML
     private Button siguienteIngredientes;
+    @FXML
+    private ToggleButton tamanoMediana;
+    @FXML
+    private ToggleButton tamanoFamiliar;
+    @FXML
+    private ToggleButton tamanoPequeña;
+    @FXML
+    private ToggleGroup tamano;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -125,11 +126,9 @@ public class FXMLDocumentController implements Initializable {
         this.ingredienteQueso.setUserData("queso");
         this.ingredienteTomate.setUserData("tomate");
         this.sinIngredientes.setUserData("sinIngredientes");
-        this.tamañoPequeña.setUserData("pequeña");
-        this.tamañoMediana.setUserData("mediana");
-        this.tamañoFamiliar.setUserData("familiar");
-        pre = new Precios();
-
+        this.tamanoPequeña.setUserData("pequeña");
+        this.tamanoMediana.setUserData("mediana");
+        this.tamanoFamiliar.setUserData("familiar");
     }
 
     @FXML
@@ -154,8 +153,8 @@ public class FXMLDocumentController implements Initializable {
     
         @FXML
     private void ponerTamaño(ActionEvent event) {
-       if(this.tamaño.getSelectedToggle() != null){
-           elegirTamaño(this.tamaño.getSelectedToggle().getUserData().toString());
+       if(this.tamano.getSelectedToggle() != null){
+           elegirTamaño(this.tamano.getSelectedToggle().getUserData().toString());
        }
     }
 
@@ -228,16 +227,16 @@ public class FXMLDocumentController implements Initializable {
                 ponerIngrediente("cebolla");
 
             } else if (tipo == this.ingredienteCebolla) {
-                this.resumenTotal.setText(String.valueOf(p.removeIngredienteExtra(this.ingredienteCebolla.getUserData().toString())));
+                this.resumenTotal.setText(p.removeIngredienteExtra(this.ingredienteCebolla.getUserData().toString()));
                 borrarIngrediente("cebolla");
             }
 
             if (tipo == this.ingredienteJamon && this.ingredienteJamon.isSelected()) {
-                this.resumenTotal.setText(String.valueOf(p.setIngredientesExtra(this.ingredienteJamon.getUserData().toString())));
+                this.resumenTotal.setText(p.setIngredientesExtra(this.ingredienteJamon.getUserData().toString()));
                 ponerIngrediente("jamon");
 
             } else if (tipo == this.ingredienteJamon) {
-                this.resumenTotal.setText(String.valueOf(p.removeIngredienteExtra(this.ingredienteJamon.getUserData().toString())));
+                this.resumenTotal.setText(p.removeIngredienteExtra(this.ingredienteJamon.getUserData().toString()));
                 borrarIngrediente("jamon");
             }
 
@@ -255,50 +254,28 @@ public class FXMLDocumentController implements Initializable {
                 ponerIngrediente("tomate");
 
             } else if (tipo == this.ingredienteTomate) {
-                this.resumenTotal.setText(String.valueOf(p.removeIngredienteExtra(this.ingredienteTomate.getUserData().toString())));
+                this.resumenTotal.setText(p.removeIngredienteExtra(this.ingredienteTomate.getUserData().toString()));
                 borrarIngrediente("tomate");
             }
 
             if (tipo == this.ingredienteOlivas && this.ingredienteOlivas.isSelected()) {
-                this.resumenTotal.setText(String.valueOf(p.setIngredientesExtra(this.ingredienteOlivas.getUserData().toString())));
+                this.resumenTotal.setText(p.setIngredientesExtra(this.ingredienteOlivas.getUserData().toString()));
                 ponerIngrediente("olivas");
 
             } else if (tipo == this.ingredienteOlivas) {
-                this.resumenTotal.setText(String.valueOf(p.removeIngredienteExtra(this.ingredienteOlivas.getUserData().toString())));
+                this.resumenTotal.setText(p.removeIngredienteExtra(this.ingredienteOlivas.getUserData().toString()));
                 borrarIngrediente("olivas");
             }
         }
     }
 
     private void borrarIngrediente(String palabra) {
-        String frase = "";
-        StringTokenizer s = new StringTokenizer(this.resumenIngredientes.getText(), ":,");
-        String palabra1 = "";
-        while (s.hasMoreTokens()) {
-            palabra1 = s.nextToken();
-            System.out.println(palabra1);
-            if (palabra1.equalsIgnoreCase("Ingredientes Extra")) {
-                frase += palabra1 + ": ";
-            } else if (palabra1.equalsIgnoreCase(" " + primeraMayuscula(palabra)) || palabra1.equalsIgnoreCase(palabra)) {
-                // No lo añado a la frase
-                System.out.println("Ha entrado1");
-            } else if (!s.hasMoreTokens()) {
-                frase += palabra1;
-                System.out.println("Ha entrado2");
-            } else {
-                frase += palabra1 + " ,";
-            }
-        }
-        this.resumenIngredientes.setText(frase);
+        
     }
 
     private void ponerIngrediente(String poner) {
-        if (this.resumenIngredientes.getText().equalsIgnoreCase("Ingredientes Extra: ")) {
-            poner = primeraMayuscula(poner);
-            this.resumenIngredientes.setText(this.resumenIngredientes.getText() + poner + " ");
-        } else {
-            this.resumenIngredientes.setText(this.resumenIngredientes.getText() + "," + poner + " ");
-        }
+        this.resumenIngredientes.getText().equalsIgnoreCase("Ingredientes Extra: ");
+            
     }
 
     private String primeraMayuscula(String palabra) {
@@ -308,10 +285,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     private void elegirTamaño(String tipo){
-        NumberFormat formato = NumberFormat.getInstance();
-        formato.setMaximumFractionDigits(2);
-        formato.setRoundingMode(RoundingMode.DOWN);
-        this.resumenTotal.setText(formato.format(p.setTamaño(tipo)));
+        this.resumenTotal.setText(p.setTamaño(tipo));
         this.resumenTamaño.setText("Tamaño de la pizza: " + tipo);
     }
 
