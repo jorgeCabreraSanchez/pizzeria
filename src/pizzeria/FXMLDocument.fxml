@@ -18,7 +18,7 @@
       </Text>
       <Line endX="-222.0" layoutX="283.0" layoutY="68.0" startX="222.0" />
       <AnchorPane layoutY="438.0" prefHeight="138.0" prefWidth="568.0" />
-      <AnchorPane fx:id="resultado" layoutX="68.0" layoutY="305.0" prefHeight="119.0" prefWidth="431.0" stylesheets="@css.css" visible="false">
+      <AnchorPane fx:id="resultado" layoutX="68.0" layoutY="305.0" prefHeight="119.0" prefWidth="431.0" stylesheets="@css.css">
          <children>
             <Label fx:id="resumenNumeroPizza" layoutX="202.0" layoutY="6.0" text="Pizza1">
                <font>
@@ -41,7 +41,7 @@
             <Label fx:id="resumenTamaño" layoutX="14.0" layoutY="96.0" prefHeight="17.0" prefWidth="308.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuMasa" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0" visible="false">
+      <AnchorPane fx:id="menuMasa" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0">
          <children>
             <ToggleButton fx:id="buttonFina" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#masa" prefHeight="154.0" prefWidth="169.0" stylesheets="@css.css" text="MasaFina">
                <font>
@@ -131,7 +131,7 @@
             <Button fx:id="Hecha" layoutX="386.0" layoutY="195.0" mnemonicParsing="false" onAction="#pizzaHecha" prefHeight="25.0" prefWidth="65.0" text="Hecha" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuOtraPizza" layoutX="58.0" layoutY="81.0" prefHeight="475.0" prefWidth="450.0">
+      <AnchorPane fx:id="menuOtraPizza" layoutX="58.0" layoutY="81.0" prefHeight="475.0" prefWidth="450.0" visible="false">
          <children>
             <AnchorPane fx:id="pedidoFinalPedidos" layoutX="5.0" layoutY="48.0" prefHeight="414.0" prefWidth="438.0">
                <children>
@@ -148,9 +148,8 @@
                   </GridPane>
                </children>
             </AnchorPane>
-            <Button fx:id="nuevaPizza" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Otra Pizza" />
+            <Button fx:id="nuevaPizza" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#nuevaPizza" prefHeight="25.0" prefWidth="76.0" text="Otra Pizza" />
             <Button fx:id="terminarPedido" layoutX="337.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Terminar Pedido" />
-            <Button layoutX="166.0" layoutY="14.0" mnemonicParsing="false" onAction="#renovarPedidos" text="Probando" />
          </children>
       </AnchorPane>
    </children>

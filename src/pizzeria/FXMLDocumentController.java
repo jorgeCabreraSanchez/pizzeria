@@ -124,8 +124,7 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane pedidoFinalPedidos;
     @FXML
     private GridPane pedidos;
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ped = new Pedido();
@@ -146,7 +145,7 @@ public class FXMLDocumentController implements Initializable {
         this.tamanoPequena.setUserData("pequeña");
         this.tamanoMediana.setUserData("mediana");
         this.tamanoFamiliar.setUserData("familiar");
-        
+
     }
 
     @FXML
@@ -196,8 +195,20 @@ public class FXMLDocumentController implements Initializable {
             ped.añadirPedido(p);
             renovarPedidos();
             this.menuOtraPizza.setVisible(true);
-            
+
         }
+    }
+    
+     @FXML
+    private void nuevaPizza(ActionEvent event) {
+        this.menuOtraPizza.setVisible(false);
+        this.menuMasa.setVisible(true);
+        this.resultado.setVisible(true);
+        int numero = p.getNumero()+1;
+        p = new Pizza();
+        p.setNumero(numero);
+        
+        
     }
 
     @FXML
@@ -306,31 +317,28 @@ public class FXMLDocumentController implements Initializable {
         this.resumenTotal.setText(p.setTamaño(tipo));
         this.resumenTamaño.setText("Tamaño de la pizza: " + tipo);
     }
-    
-    @FXML
-    private void renovarPedidos(){
+
+    private void renovarPedidos() {
         List<Pizza> pizzas = ped.getPizzas();
-//        for (Pizza pizza : pizzas) {
-//pizza.getNumero()
+        
+        for (Pizza pizza : pizzas) {
             String descripcion = "";
-           Label label = new Label("Pizza" + 1);
-           
-           TitledPane panel = new TitledPane();
-           panel.setText("Probandooo");
-           descripcion += "sadasd";
-            TextArea textArea = new TextArea(descripcion);
-           panel.setContent(textArea);
-           this.pedidos.add(panel, 0, 0); 
+            TitledPane panel = new TitledPane();
+            panel.setText("Pizza" + pizza.getNumero());
+            descripcion += "Tipo de masa: " + p.getTipoMasa() + "\n" +
+                    "Tipo de pizza: " + p.getTipoPizza() + "\n" +
+                    "Ingredientes Extra: " + p.ingredientes() + "\n" +
+                    "Tamaño de la pizza: " + p.getTamaño() + "\n" +
+                    "Total: " + p.getTotal() + "€";
             
-          
-           
-           this.menuOtraPizza.setClip(pedidos);
-           
-//        }
-        
-        
+            TextArea textArea = new TextArea(descripcion);
+            panel.setContent(textArea);
+            this.pedidos.add(panel, 0, pizza.getNumero()-1);
+            
+        }
     }
 
-    /* Crear alerta al pasar de ingredientes Extra diciendo que si todos estan en getSelected(false)
-    tiene que poner alguno */
+   
+
+  
 }

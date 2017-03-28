@@ -21,6 +21,18 @@ public class Pizza {
     public Pizza() {
 
     }
+    
+    public String getTipoMasa(){
+        return this.tipoMasa;
+    }
+    
+    public String getTipoPizza(){
+        return this.tipoPizza;
+    }
+    
+    public String getTamaño(){
+        return this.tamaño;
+    }
 
     public void setNumero(int numero) {
         this.numero = numero;
@@ -164,8 +176,11 @@ public class Pizza {
         this.Total = numero;
     }
 
-    public double getTotal() {
-        return Total;
+    public String getTotal() {
+        NumberFormat formato = NumberFormat.getInstance();
+        formato.setMaximumFractionDigits(2);
+        formato.setRoundingMode(RoundingMode.DOWN);
+        return formato.format(this.Total);
     }
 
 }
