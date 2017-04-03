@@ -325,11 +325,11 @@ public class FXMLDocumentController implements Initializable {
             String descripcion = "";
             TitledPane panel = new TitledPane();
             panel.setText("Pizza" + pizza.getNumero());
-            descripcion += "Tipo de masa: " + p.getTipoMasa() + "\n" +
-                    "Tipo de pizza: " + p.getTipoPizza() + "\n" +
-                    "Ingredientes Extra: " + p.ingredientes() + "\n" +
-                    "Tamaño de la pizza: " + p.getTamaño() + "\n" +
-                    "Total: " + p.getTotal() + "€";
+            descripcion += "Tipo de masa: " + pizza.getTipoMasa() + "\n" +
+                    "Tipo de pizza: " + pizza.getTipoPizza() + "\n" +
+                    "Ingredientes Extra: " + pizza.ingredientes() + "\n" +
+                    "Tamaño de la pizza: " + pizza.getTamaño() + "\n" +
+                    "Total: " + pizza.getTotal() + "€";
             
             TextArea textArea = new TextArea(descripcion);
             panel.setContent(textArea);

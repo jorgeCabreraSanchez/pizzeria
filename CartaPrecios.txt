@@ -1,0 +1,16 @@
+fina:9.00
+gruesa:9.50
+Basica:3.00
+CuatroQuesos:5.00
+Barbacoa:7.00
+Mexicana:8.50
+sinIngredientes:0.00
+jamon:0.50
+queso:0.75
+tomate:1.50
+cebolla:2.50
+olivas:1.00
+pequeña:1.00
+mediana:1.15
+familiar:1.30
+
