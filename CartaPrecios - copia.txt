@@ -16,7 +16,7 @@ tomate:1.50
 cebolla:2.50
 olivas:1.00
 #
-Tamanio
-pequenia:1.00
+Tamaño
+pequeña:1.00
 mediana:1.15
 familiar:1.30

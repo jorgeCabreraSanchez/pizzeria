@@ -127,6 +127,7 @@ public class FXMLDocumentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Precios.cargaPreciosTuyos();
         ped = new Pedido();
         p = new Pizza();
         p.setNumero(1);
