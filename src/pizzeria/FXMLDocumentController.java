@@ -143,7 +143,7 @@ public class FXMLDocumentController implements Initializable {
         this.ingredienteQueso.setUserData("queso");
         this.ingredienteTomate.setUserData("tomate");
         this.sinIngredientes.setUserData("sinIngredientes");
-        this.tamanoPequena.setUserData("pequeña");
+        this.tamanoPequena.setUserData("pequenia");
         this.tamanoMediana.setUserData("mediana");
         this.tamanoFamiliar.setUserData("familiar");
 

@@ -49,7 +49,7 @@ public class Precios {
     }
 
     public static boolean cargaPreciosTuyos() {
-        try (Stream<String> datos = Files.lines(Paths.get("CartaPrecios.txt","UTF-8"))) {
+        try (Stream<String> datos = Files.lines(Paths.get("CartaPrecios.txt"))) {
             Iterator<String> it = datos.iterator();
             int hacer = 0;
             double dinero = 0;
