@@ -5,6 +5,7 @@
  */
 package pizzeria;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -29,27 +30,31 @@ public class Precios {
     static public Map<String, Double> ingredientesExtra = new HashMap<>();
     static public Map<String, Double> tamaño = new HashMap<>();
 
-    public static boolean cargarPreciosDefault() {
+    public static void cargarPreciosDefault(boolean que) {
         precioTipoMasa.put("fina", 9.00);
-        precioTipoMasa.put("gruesa",9.50);
-        tiposPizza.put("Basica",3.00);
-        tiposPizza.put("CuatroQuesos",5.00);
-        tiposPizza.put("Barbacoa",7.00);
-        tiposPizza.put("Mexicana",8.50);
-        ingredientesExtra.put("sinIngredientes",0.00);
-        ingredientesExtra.put("jamon",0.50);
-        ingredientesExtra.put("queso",0.75);
-        ingredientesExtra.put("tomate",1.50);
-        ingredientesExtra.put("cebolla",2.50);
-        ingredientesExtra.put("olivas",1.00);
-        tamaño.put("pequenia",1.00);
-        tamaño.put("mediana",1.15);
-        tamaño.put("familiar",1.30);
-        return true;
+        precioTipoMasa.put("gruesa", 9.50);
+        tiposPizza.put("Basica", 3.00);
+        tiposPizza.put("CuatroQuesos", 5.00);
+        tiposPizza.put("Barbacoa", 7.00);
+        tiposPizza.put("Mexicana", 8.50);
+        ingredientesExtra.put("sinIngredientes", 0.00);
+        ingredientesExtra.put("jamon", 0.50);
+        ingredientesExtra.put("queso", 0.75);
+        ingredientesExtra.put("tomate", 1.50);
+        ingredientesExtra.put("cebolla", 2.50);
+        ingredientesExtra.put("olivas", 1.00);
+        tamaño.put("pequenia", 1.00);
+        tamaño.put("mediana", 1.15);
+        tamaño.put("familiar", 1.30);
+        if (que) {
+            Alert alerta = new Alert(AlertType.WARNING);
+            alerta.setHeaderText("Usted no ha seleccionado ningún archivo por lo que hemos cargado los precios por defecto");
+            alerta.showAndWait();
+        }
     }
 
-    public static boolean cargaPreciosTuyos() {
-        try (Stream<String> datos = Files.lines(Paths.get("CartaPrecios.txt"))) {
+    public static void cargaPreciosTuyos(File archivo) {
+        try (Stream<String> datos = Files.lines(archivo.toPath())) {
             Iterator<String> it = datos.iterator();
             int hacer = 0;
             double dinero = 0;
@@ -87,14 +92,15 @@ public class Precios {
                 }
 
             }
+            Alert alerta = new Alert(AlertType.INFORMATION);
+            alerta.setHeaderText("Los precios han sido cargados correctamente");
+            alerta.showAndWait();
         } catch (Exception ex) {
             Alert alerta = new Alert(AlertType.WARNING);
             alerta.setHeaderText("Hemos tenido un problema cargando los precios y hemos cargado los precios por defecto");
             alerta.showAndWait();
-            cargarPreciosDefault();
-            
+            cargarPreciosDefault(false);
         }
-        return true;
     }
 
     public Precios() {

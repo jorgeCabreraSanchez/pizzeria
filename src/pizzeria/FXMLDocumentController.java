@@ -6,8 +6,11 @@
 package pizzeria;
 
 import java.awt.Image;
+import java.io.File;
 import java.math.RoundingMode;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +19,11 @@ import java.util.StringTokenizer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -30,9 +35,15 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import static javafx.scene.input.KeyCode.T;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import static pizzeria.Precios.cargarPreciosDefault;
 
 /**
  *
@@ -42,6 +53,8 @@ public class FXMLDocumentController implements Initializable {
 
     Pizza p;
     Pedido ped;
+    GridPane pedidos2 = new GridPane();
+
     @FXML
     private ToggleButton buttonFina;
     @FXML
@@ -124,13 +137,15 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane pedidoFinalPedidos;
     @FXML
     private GridPane pedidos;
+    @FXML
+    private Button inicio;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Precios.cargaPreciosTuyos();
         ped = new Pedido();
         p = new Pizza();
-        p.setNumero(1);
+        p.setNumero(p.numeroPizzas());
+        this.pedidoFinalPedidos.getChildren().add(pedidos2);
         this.pizzaBasica.setUserData("Basica");
         this.pizzaCuatroQuesos.setUserData("CuatroQuesos");
         this.pizzaBarbacoa.setUserData("Barbacoa");
@@ -146,6 +161,32 @@ public class FXMLDocumentController implements Initializable {
         this.tamanoPequena.setUserData("pequenia");
         this.tamanoMediana.setUserData("mediana");
         this.tamanoFamiliar.setUserData("familiar");
+
+    }
+
+    @FXML
+    private void entrar(ActionEvent event) {
+        Alert ventanita = new Alert(AlertType.INFORMATION);
+        ventanita.setTitle("Precios");
+        ventanita.setHeaderText("Eliga el archivo donde están los precios de los Productos");
+        ButtonType abrir = new ButtonType("Buscar archivo");
+        ButtonType cancelar = new ButtonType("Cancelar");
+        ventanita.getButtonTypes().setAll(abrir, cancelar);
+        Optional<ButtonType> elegido = ventanita.showAndWait();
+        if (elegido.get() == abrir) {
+            FileChooser elegir = new FileChooser();
+            Path archivo = Paths.get(new File("").getAbsolutePath());
+            elegir.setInitialDirectory(archivo.toFile());
+
+            Precios.cargaPreciosTuyos(elegir.showOpenDialog(null));
+        } else if (elegido.get() == cancelar) {
+            Precios.cargarPreciosDefault(true);
+
+        }
+
+        this.inicio.setVisible(false);
+        this.menuMasa.setVisible(true);
+        this.resultado.setVisible(true);
 
     }
 
@@ -187,29 +228,23 @@ public class FXMLDocumentController implements Initializable {
         } else {
             this.menuTamaño.setVisible(false);
             this.resultado.setVisible(false);
-            this.resumenIngredientes.setText("");
-            this.resumenNumeroPizza.setText("");
-            this.resumenTamaño.setText("");
-            this.resumenTipoMasa.setText("");
-            this.resumenTipoPizza.setText("");
-            this.resumenTotal.setText("0");
+            p.setInfoPizza();
             ped.añadirPedido(p);
             renovarPedidos();
             this.menuOtraPizza.setVisible(true);
-
+            limpieza();
         }
     }
-    
-     @FXML
+
+    @FXML
     private void nuevaPizza(ActionEvent event) {
         this.menuOtraPizza.setVisible(false);
         this.menuMasa.setVisible(true);
         this.resultado.setVisible(true);
-        int numero = p.getNumero()+1;
+        int numero = p.numeroPizzas();
         p = new Pizza();
         p.setNumero(numero);
-        
-        
+
     }
 
     @FXML
@@ -320,26 +355,57 @@ public class FXMLDocumentController implements Initializable {
     }
 
     private void renovarPedidos() {
+        pedidos2.getChildren().clear();
         List<Pizza> pizzas = ped.getPizzas();
-        
+        int x = 0;
+        int y = 0;
+        int numero = 0;
+
         for (Pizza pizza : pizzas) {
+            pedidos2.setPrefSize(this.pedidoFinalPedidos.getWidth(), this.pedidoFinalPedidos.getHeight());
             String descripcion = "";
             TitledPane panel = new TitledPane();
             panel.setText("Pizza" + pizza.getNumero());
-            descripcion += "Tipo de masa: " + pizza.getTipoMasa() + "\n" +
-                    "Tipo de pizza: " + pizza.getTipoPizza() + "\n" +
-                    "Ingredientes Extra: " + pizza.ingredientes() + "\n" +
-                    "Tamaño de la pizza: " + pizza.getTamaño() + "\n" +
-                    "Total: " + pizza.getTotal() + "€";
-            
+            descripcion += pizza.getInfoPizza();
+
             TextArea textArea = new TextArea(descripcion);
+            textArea.setEditable(false);
             panel.setContent(textArea);
-            this.pedidos.add(panel, 0, pizza.getNumero()-1);
-            
+            if (pizzas.size() > 6) {
+                panel.setExpanded(false);
+            }
+
+            if (numero == 0) {
+                pedidos2.add(panel, 0, 0);
+            } else if (x == 0) {
+                x += 1;
+                pedidos2.add(panel, x, y);
+            } else {
+                x = 0;
+                y += 1;
+                pedidos2.add(panel, x, y);
+            }
+            numero++;
         }
+
     }
 
-   
+    private void limpieza() {
+        this.resumenIngredientes.setText("");
+        this.resumenNumeroPizza.setText("");
+        this.resumenTamaño.setText("");
+        this.resumenTipoMasa.setText("");
+        this.resumenTipoPizza.setText("");
+        this.resumenTotal.setText("0");
+        this.tipoMasas.getSelectedToggle().setSelected(false);
+        this.tipoPizzas.getSelectedToggle().setSelected(false);
+        this.ingredienteCebolla.setSelected(false);
+        this.ingredienteJamon.setSelected(false);
+        this.ingredienteOlivas.setSelected(false);
+        this.ingredienteQueso.setSelected(false);
+        this.ingredienteTomate.setSelected(false);
+        this.sinIngredientes.setSelected(false);
+        this.tamano.getSelectedToggle().setSelected(false);
+    }
 
-  
 }

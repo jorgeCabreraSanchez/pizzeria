@@ -17,20 +17,39 @@ public class Pizza {
     private String tipoPizza = "";
     private Set<String> ingredientes = new HashSet<>();
     private String tamaño = "";
+    private static int pizzas = 0;
+    private String infoPizza = "";
 
     public Pizza() {
 
     }
-    
-    public String getTipoMasa(){
+
+    public void setInfoPizza() {
+        this.infoPizza += "Tipo de masa: " + tipoMasa + "\n"
+                + "Tipo de pizza: " + tipoPizza+ "\n"
+                + "Ingredientes Extra: " + ingredientes() + "\n"
+                + "Tamaño de la pizza: " + tamaño + "\n"
+                + "Total: " + getTotal() + "€";
+    }
+
+    public String getInfoPizza() {
+        return this.infoPizza;
+    }
+
+    public int numeroPizzas() {
+        Pizza.pizzas += 1;
+        return Pizza.pizzas;
+    }
+
+    public String getTipoMasa() {
         return this.tipoMasa;
     }
-    
-    public String getTipoPizza(){
+
+    public String getTipoPizza() {
         return this.tipoPizza;
     }
-    
-    public String getTamaño(){
+
+    public String getTamaño() {
         return this.tamaño;
     }
 

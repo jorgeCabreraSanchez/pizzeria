@@ -7,6 +7,11 @@ and open the template in the editor.
     Created on : 23-mar-2017, 13:09:38
     Author     : jorge
 */
+#inicio{
+    -fx-background-image: url("images/inicio.jpg");
+    -fx-background-size: stretch;
+}
+
 #buttonFina{
     -fx-background-image: url("images/masaFina.jpg");
     -fx-background-size: stretch;
@@ -22,7 +27,7 @@ and open the template in the editor.
 }
 #pizzaBasica:focused{
     -fx-border-color: #7990e7;
-    -fx-border-width: 2px;
+    -fx-border-width: 3px;
 }
 #pizzaCuatroQuesos{
     -fx-background-image: url("images/pizzaCuatroQuesos.png");
