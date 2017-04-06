@@ -17,9 +17,12 @@
          </font>
       </Text>
       <Line endX="-222.0" layoutX="283.0" layoutY="68.0" startX="222.0" />
-      <Button fx:id="inicio" layoutY="-2.0" mnemonicParsing="false" onAction="#entrar" prefHeight="583.0" prefWidth="574.0" stylesheets="@css.css" />
-      <AnchorPane layoutY="438.0" prefHeight="138.0" prefWidth="568.0" visible="false" />
-      <AnchorPane fx:id="resultado" layoutX="68.0" layoutY="305.0" prefHeight="119.0" prefWidth="431.0" stylesheets="@css.css" visible="false">
+      <Button fx:id="inicio" layoutY="-2.0" mnemonicParsing="false" onAction="#entrar" prefHeight="583.0" prefWidth="574.0" stylesheets="@css.css" visible="false" />
+      <AnchorPane layoutY="438.0" prefHeight="138.0" prefWidth="568.0">
+         <children>
+            <Button fx:id="buttonCancelarPizza" layoutX="39.0" layoutY="20.0" mnemonicParsing="false" onAction="#cancelarPizza" text="Cancelar Pizza" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="resultado" layoutX="68.0" layoutY="305.0" prefHeight="119.0" prefWidth="431.0" stylesheets="@css.css">
          <children>
             <Label fx:id="resumenNumeroPizza" layoutX="202.0" layoutY="6.0" text="Pizza1">
                <font>
@@ -42,7 +45,7 @@
             <Label fx:id="resumenTamaño" layoutX="14.0" layoutY="96.0" prefHeight="17.0" prefWidth="308.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuMasa" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0" visible="false">
+      <AnchorPane fx:id="menuMasa" layoutX="61.0" layoutY="81.0" prefHeight="216.0" prefWidth="447.0">
          <children>
             <ToggleButton fx:id="buttonFina" alignment="TOP_LEFT" contentDisplay="RIGHT" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#masa" prefHeight="154.0" prefWidth="169.0" stylesheets="@css.css" text="MasaFina">
                <font>
@@ -136,21 +139,7 @@
          <children>
             <Button fx:id="terminarPedido" layoutX="337.0" layoutY="14.0" mnemonicParsing="false" onAction="#terminar" prefHeight="25.0" prefWidth="106.0" text="Terminar Pedido" />
             <Button fx:id="nuevaPizza" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#nuevaPizza" prefHeight="25.0" prefWidth="76.0" text="Otra Pizza" />
-            <AnchorPane fx:id="pedidoFinalPedidos" layoutX="5.0" layoutY="48.0" prefHeight="414.0" prefWidth="438.0">
-               <children>
-                  <GridPane fx:id="pedidos" cacheShape="false" focusTraversable="true" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="416.0" prefWidth="438.0">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="396.0" minHeight="10.0" prefHeight="142.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="323.0" minHeight="7.0" prefHeight="150.0" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="145.0" minHeight="10.0" prefHeight="125.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                  </GridPane>
-               </children>
-            </AnchorPane>
+            <AnchorPane fx:id="pedidoFinalPedidos" layoutX="-15.0" layoutY="48.0" prefHeight="414.0" prefWidth="477.0" />
          </children>
       </AnchorPane>
    </children>

@@ -30,7 +30,7 @@ public class Precios {
     static public Map<String, Double> ingredientesExtra = new HashMap<>();
     static public Map<String, Double> tamaño = new HashMap<>();
 
-    public static void cargarPreciosDefault(boolean que) {
+    public static void cargarPreciosDefault() {
         precioTipoMasa.put("fina", 9.00);
         precioTipoMasa.put("gruesa", 9.50);
         tiposPizza.put("Basica", 3.00);
@@ -46,15 +46,11 @@ public class Precios {
         tamaño.put("pequenia", 1.00);
         tamaño.put("mediana", 1.15);
         tamaño.put("familiar", 1.30);
-        if (que) {
-            Alert alerta = new Alert(AlertType.WARNING);
-            alerta.setHeaderText("Usted no ha seleccionado ningún archivo por lo que hemos cargado los precios por defecto");
-            alerta.showAndWait();
-        }
+        
     }
 
-    public static void cargaPreciosTuyos(File archivo) {
-        try (Stream<String> datos = Files.lines(archivo.toPath())) {
+    public static void cargaPreciosTuyos() {
+        try (Stream<String> datos = Files.lines(Paths.get("CartaPrecios.txt"))) {
             Iterator<String> it = datos.iterator();
             int hacer = 0;
             double dinero = 0;
@@ -96,10 +92,12 @@ public class Precios {
             alerta.setHeaderText("Los precios han sido cargados correctamente");
             alerta.showAndWait();
         } catch (Exception ex) {
+            cargarPreciosDefault();
             Alert alerta = new Alert(AlertType.WARNING);
-            alerta.setHeaderText("Hemos tenido un problema cargando los precios y hemos cargado los precios por defecto");
+            alerta.setHeaderText("Hemos tenido un problema cargando los precios desde el archivo y hemos cargado"
+                    + "nuestros precios por defecto");
             alerta.showAndWait();
-            cargarPreciosDefault(false);
+            
         }
     }
 

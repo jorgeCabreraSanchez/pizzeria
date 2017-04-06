@@ -1,6 +1,7 @@
 package pizzeria;
 
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,7 +18,7 @@ public class Pizza {
     private String tipoPizza = "";
     private Set<String> ingredientes = new HashSet<>();
     private String tamaño = "";
-    private static int pizzas = 0;
+    public static int pizzas = 0;
     private String infoPizza = "";
 
     public Pizza() {
@@ -25,11 +26,14 @@ public class Pizza {
     }
 
     public void setInfoPizza() {
-        this.infoPizza += "Tipo de masa: " + tipoMasa + "\n"
-                + "Tipo de pizza: " + tipoPizza+ "\n"
-                + "Ingredientes Extra: " + ingredientes() + "\n"
-                + "Tamaño de la pizza: " + tamaño + "\n"
-                + "Total: " + getTotal() + "€";
+
+        DecimalFormat formato = new DecimalFormat("00.00");
+        Double porcentaje = (Precios.tamaño.get(tamaño) - 1) * 100;
+        this.infoPizza += String.format("Tipo de masa              %-12s \n"
+                + "Tipo de pizza:              %-12s  \n"
+                + "Ingredientes Extra:      %-12s \n"
+                + "Tamaño de la pizza:    %-12s  \n"
+                + "Total: %32s€", tipoMasa, tipoPizza, ingredientes(), tamaño, getTotal());
     }
 
     public String getInfoPizza() {
@@ -200,6 +204,29 @@ public class Pizza {
         formato.setMaximumFractionDigits(2);
         formato.setRoundingMode(RoundingMode.DOWN);
         return formato.format(this.Total);
+    }
+
+    public String infoTicket() {
+        
+        String extras = "",devolver = "";
+        int contador = 0;
+        for (String ingrediente : ingredientes) {
+            if (contador == 0) {
+                extras += String.format("%-12s %8.2f  \n", ingrediente, Precios.ingredientesExtra.get(ingrediente));
+            } else {
+                extras += String.format("                      %-12s %8.2f  \n", ingrediente, Precios.ingredientesExtra.get(ingrediente));
+            }
+
+            contador++;
+        }
+        DecimalFormat formato = new DecimalFormat("0.00%");
+        Double porcentaje = Precios.tamaño.get(tamaño)-1;
+        devolver += String.format("Tipo de masa          %-12s %8.2f \n"
+                + "Tipo de pizza:        %-12s %8.2f \n"
+                + "Ingredientes Extra:   %-12s"
+                + "Tamaño de la pizza:   %-12s %9s \n"
+                + "Total: %36s€", tipoMasa, Precios.precioTipoMasa.get(tipoMasa), tipoPizza, Precios.tiposPizza.get(tipoPizza), extras, tamaño, formato.format(porcentaje), getTotal());
+    return devolver;
     }
 
 }

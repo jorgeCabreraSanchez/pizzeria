@@ -136,16 +136,12 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private AnchorPane pedidoFinalPedidos;
     @FXML
-    private GridPane pedidos;
-    @FXML
     private Button inicio;
+    @FXML
+    private Button buttonCancelarPizza;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ped = new Pedido();
-        p = new Pizza();
-        p.setNumero(p.numeroPizzas());
-        this.pedidoFinalPedidos.getChildren().add(pedidos2);
         this.pizzaBasica.setUserData("Basica");
         this.pizzaCuatroQuesos.setUserData("CuatroQuesos");
         this.pizzaBarbacoa.setUserData("Barbacoa");
@@ -161,28 +157,16 @@ public class FXMLDocumentController implements Initializable {
         this.tamanoPequena.setUserData("pequenia");
         this.tamanoMediana.setUserData("mediana");
         this.tamanoFamiliar.setUserData("familiar");
+        Precios.cargaPreciosTuyos();
+        this.pedidoFinalPedidos.getChildren().add(pedidos2);
 
     }
 
     @FXML
     private void entrar(ActionEvent event) {
-        Alert ventanita = new Alert(AlertType.INFORMATION);
-        ventanita.setTitle("Precios");
-        ventanita.setHeaderText("Eliga el archivo donde están los precios de los Productos");
-        ButtonType abrir = new ButtonType("Buscar archivo");
-        ButtonType cancelar = new ButtonType("Cancelar");
-        ventanita.getButtonTypes().setAll(abrir, cancelar);
-        Optional<ButtonType> elegido = ventanita.showAndWait();
-        if (elegido.get() == abrir) {
-            FileChooser elegir = new FileChooser();
-            Path archivo = Paths.get(new File("").getAbsolutePath());
-            elegir.setInitialDirectory(archivo.toFile());
-
-            Precios.cargaPreciosTuyos(elegir.showOpenDialog(null));
-        } else if (elegido.get() == cancelar) {
-            Precios.cargarPreciosDefault(true);
-
-        }
+        ped = new Pedido();
+        p = new Pizza();
+        p.setNumero(p.numeroPizzas());
 
         this.inicio.setVisible(false);
         this.menuMasa.setVisible(true);
@@ -283,6 +267,43 @@ public class FXMLDocumentController implements Initializable {
         this.menuIngredientes.setVisible(true);
     }
 
+        @FXML
+    private void terminar(ActionEvent event) {
+        boolean variable = true;
+        Alert ventanita = new Alert(AlertType.INFORMATION);
+        ventanita.setTitle("Precios");
+        ventanita.setHeaderText("Eliga el archivo donde quiere generar el ticket");
+        ButtonType abrir = new ButtonType("Buscar archivo");
+        ButtonType defecto = new ButtonType("Por defecto");
+        ButtonType cancelar = new ButtonType("Cancelar");
+        ventanita.getButtonTypes().setAll(abrir, defecto, cancelar);
+        Optional<ButtonType> elegido = ventanita.showAndWait();
+
+        if (elegido.get() == abrir) {
+            DirectoryChooser elegir = new DirectoryChooser();
+            Path archivo = Paths.get(new File("").getAbsolutePath() + "\\tickets");
+            elegir.setInitialDirectory(archivo.toFile());
+
+            variable = ped.generarTicket1(elegir.showDialog(null).toPath());
+        } else if (elegido.get() == cancelar) {
+            Alert alerta = new Alert(AlertType.WARNING);
+            alerta.setTitle("Ticket");
+            alerta.setHeaderText("No se generará ticket");
+            alerta.setContentText("No se generará ticket debido a que usted no ha puesto \n"
+                    + "un archivo destino");
+            variable = false;
+        } else if (elegido.get() == defecto) {
+            variable = ped.generarTicket1();
+        }
+
+        if (variable) {
+            this.menuOtraPizza.setVisible(false);
+            this.inicio.setVisible(true);
+
+        }
+
+    }
+    
     private void elegirMasa(String tipo) {
         this.resumenTotal.setText(p.setTipoMasa(tipo));
         this.resumenTipoMasa.setText("Tipo de masa: " + tipo);
@@ -397,20 +418,25 @@ public class FXMLDocumentController implements Initializable {
         this.resumenTipoMasa.setText("");
         this.resumenTipoPizza.setText("");
         this.resumenTotal.setText("0");
-        this.tipoMasas.getSelectedToggle().setSelected(false);
-        this.tipoPizzas.getSelectedToggle().setSelected(false);
+        if (this.tipoMasas.getSelectedToggle() != null) {
+            this.tipoMasas.getSelectedToggle().setSelected(false);
+        }
+        if (this.tipoPizzas.getSelectedToggle() != null) {
+            this.tipoPizzas.getSelectedToggle().setSelected(false);
+        }
         this.ingredienteCebolla.setSelected(false);
         this.ingredienteJamon.setSelected(false);
         this.ingredienteOlivas.setSelected(false);
         this.ingredienteQueso.setSelected(false);
         this.ingredienteTomate.setSelected(false);
         this.sinIngredientes.setSelected(false);
-        this.tamano.getSelectedToggle().setSelected(false);
+        if (this.tamano.getSelectedToggle() != null) {
+            this.tamano.getSelectedToggle().setSelected(false);
+        }
     }
 
-    @FXML
-    private void terminar(ActionEvent event) {
-    ped.generarTicket();
-    }
+    
+
+
 
 }
