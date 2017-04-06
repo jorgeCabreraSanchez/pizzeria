@@ -408,4 +408,9 @@ public class FXMLDocumentController implements Initializable {
         this.tamano.getSelectedToggle().setSelected(false);
     }
 
+    @FXML
+    private void terminar(ActionEvent event) {
+    ped.generarTicket();
+    }
+
 }

@@ -134,7 +134,7 @@
       </AnchorPane>
       <AnchorPane fx:id="menuOtraPizza" layoutX="58.0" layoutY="81.0" prefHeight="475.0" prefWidth="450.0" stylesheets="@css.css" visible="false">
          <children>
-            <Button fx:id="terminarPedido" layoutX="337.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Terminar Pedido" />
+            <Button fx:id="terminarPedido" layoutX="337.0" layoutY="14.0" mnemonicParsing="false" onAction="#terminar" prefHeight="25.0" prefWidth="106.0" text="Terminar Pedido" />
             <Button fx:id="nuevaPizza" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#nuevaPizza" prefHeight="25.0" prefWidth="76.0" text="Otra Pizza" />
             <AnchorPane fx:id="pedidoFinalPedidos" layoutX="5.0" layoutY="48.0" prefHeight="414.0" prefWidth="438.0">
                <children>
