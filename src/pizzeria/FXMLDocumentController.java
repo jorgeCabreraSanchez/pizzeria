@@ -138,7 +138,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button inicio;
     @FXML
-    private Button buttonCancelarPizza;
+    private Label total;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -212,7 +212,7 @@ public class FXMLDocumentController implements Initializable {
         } else {
             this.menuTamaño.setVisible(false);
             this.resultado.setVisible(false);
-            p.setInfoPizza();
+            this.total.setText(p.setInfoPizza());
             ped.añadirPedido(p);
             renovarPedidos();
             this.menuOtraPizza.setVisible(true);

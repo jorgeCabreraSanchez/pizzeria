@@ -36,9 +36,11 @@ public class Pedido {
 
     private List<Pizza> pizzas = new ArrayList<>();
     private static int totalPedidos = 1;
-
+    
+    
     public Pedido() {
         Pizza.pizzas = 0;
+        Pizza.totalPedido = 0;
     }
 
     public boolean generarTicket1(Path directorio) {
@@ -66,8 +68,14 @@ public class Pedido {
                     bw.newLine();
                 }
                 bw.newLine();
+                
             }
-
+            
+            bw.newLine();
+            bw.append("Total:" +Pizza.getTotalPedido());
+            bw.newLine();
+            
+            
             Alert alerta = new Alert(AlertType.INFORMATION);
             alerta.setTitle("Generar Tickets");
             alerta.setHeaderText("El ticket se ha genarado correctamente");

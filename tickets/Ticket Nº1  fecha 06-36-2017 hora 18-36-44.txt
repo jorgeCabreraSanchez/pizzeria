@@ -1,7 +1,0 @@
-Pizza1
-Tipo de masa          gruesa           9,50 
-Tipo de pizza:        Mexicana         8,50 
-Ingredientes Extra:   cebolla          2,50  
-Tamaño de la pizza:   familiar        30,00% 
-Total:                                26,65€
-

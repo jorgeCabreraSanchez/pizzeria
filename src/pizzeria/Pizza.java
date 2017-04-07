@@ -20,20 +20,27 @@ public class Pizza {
     private String tamaño = "";
     public static int pizzas = 0;
     private String infoPizza = "";
+    public static double totalPedido = 0.0;
 
     public Pizza() {
 
     }
 
-    public void setInfoPizza() {
-
-        DecimalFormat formato = new DecimalFormat("00.00");
+    public static String getTotalPedido(){
+        DecimalFormat formato = new DecimalFormat("00.00€");
+        return formato.format(Pizza.totalPedido);
+    }
+    
+    public String setInfoPizza() {
+        
         Double porcentaje = (Precios.tamaño.get(tamaño) - 1) * 100;
         this.infoPizza += String.format("Tipo de masa              %-12s \n"
                 + "Tipo de pizza:              %-12s  \n"
                 + "Ingredientes Extra:      %-12s \n"
                 + "Tamaño de la pizza:    %-12s  \n"
                 + "Total: %32s€", tipoMasa, tipoPizza, ingredientes(), tamaño, getTotal());
+        DecimalFormat formato = new DecimalFormat("00.00€");
+        return formato.format(Pizza.totalPedido += this.Total);        
     }
 
     public String getInfoPizza() {

@@ -1,0 +1,18 @@
+Pizza1
+Tipo de masa          fina             9,00 
+Tipo de pizza:        Mexicana         8,50 
+Ingredientes Extra:   olivas           1,00  
+                      cebolla          2,50  
+Tamaño de la pizza:   mediana         15,00% 
+Total:                                24,15€
+
+Pizza2
+Tipo de masa          fina             9,00 
+Tipo de pizza:        Mexicana         8,50 
+Ingredientes Extra:   olivas           1,00  
+                      cebolla          2,50  
+Tamaño de la pizza:   familiar        30,00% 
+Total:                                 27,3€
+
+
+Total:51,45€
