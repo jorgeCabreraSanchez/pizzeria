@@ -39,7 +39,7 @@ public class Pedido {
     
     
     public Pedido() {
-        Pizza.pizzas = 0;
+        Pizza.pizzas = 0; 
         Pizza.totalPedido = 0;
     }
 
