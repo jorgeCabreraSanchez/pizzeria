@@ -1,0 +1,10 @@
+Pizza1
+Tipo de masa          fina             9,00 
+Tipo de pizza:        CuatroQuesos     5,00 
+Ingredientes Extra:   olivas           1,00  
+                      cebolla          2,50  
+Tamaño de la pizza:   mediana         15,00% 
+Total:                                20,12€
+
+
+Total Pedido:20,12€

@@ -11,6 +11,7 @@ import java.math.RoundingMode;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Optional;
@@ -41,6 +42,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import static pizzeria.Precios.cargarPreciosDefault;
@@ -54,7 +56,8 @@ public class FXMLDocumentController implements Initializable {
     Pizza p;
     Pedido ped;
     GridPane pedidos2 = new GridPane();
-
+    GridPane detalles = new GridPane();
+    
     @FXML
     private ToggleButton buttonFina;
     @FXML
@@ -159,14 +162,18 @@ public class FXMLDocumentController implements Initializable {
         this.tamanoFamiliar.setUserData("familiar");
         Precios.cargaPreciosTuyos();
         this.pedidoFinalPedidos.getChildren().add(pedidos2);
-
+        this.resultado.getChildren().add(detalles);
+        this.detalles.add(this.resumenTipoMasa, 0, 0);
+        this.detalles.add(this.resumenTipoPizza, 0, 1); 
+        this.detalles.add(this.resumenIngredientes, 0, 2);
+        this.detalles.add(this.resumenTamaño, 0, 3);
+        this.detalles.setStyle("-fx-padding: 50px");
     }
 
     @FXML
     private void entrar(ActionEvent event) {
         ped = new Pedido();
-        p = new Pizza();
-        p.setNumero(p.numeroPizzas());
+        p = new Pizza(ped);
 
         this.inicio.setVisible(false);
         this.menuMasa.setVisible(true);
@@ -212,7 +219,8 @@ public class FXMLDocumentController implements Initializable {
         } else {
             this.menuTamaño.setVisible(false);
             this.resultado.setVisible(false);
-            this.total.setText(p.setInfoPizza());
+            p.setInfoPizza();
+            this.total.setText(p.getTotalPedido());
             ped.añadirPedido(p);
             renovarPedidos();
             this.menuOtraPizza.setVisible(true);
@@ -224,11 +232,8 @@ public class FXMLDocumentController implements Initializable {
     private void nuevaPizza(ActionEvent event) {
         this.menuOtraPizza.setVisible(false);
         this.menuMasa.setVisible(true);
-        this.resultado.setVisible(true);
-        int numero = p.numeroPizzas();
-        p = new Pizza();
-        p.setNumero(numero);
-
+        this.resultado.setVisible(true);       
+        p = new Pizza(ped);       
     }
 
     @FXML
@@ -306,12 +311,13 @@ public class FXMLDocumentController implements Initializable {
     
     private void elegirMasa(String tipo) {
         this.resumenTotal.setText(p.setTipoMasa(tipo));
-        this.resumenTipoMasa.setText("Tipo de masa: " + tipo);
+        this.resumenTipoMasa.setText(String.format("Tipo de masa:          %-12s %8.2f",tipo,Precios.precioTipoMasa.get(tipo)));
+
     }
 
     private void elegirPizza(String tipo) {
         this.resumenTotal.setText(p.setTipoPizza(tipo));
-        this.resumenTipoPizza.setText("Tipo de pizza: " + tipo);
+        this.resumenTipoPizza.setText(String.format("Tipo de pizza:        %-12s %8.2f",tipo,Precios.tiposPizza.get(tipo)));
     }
 
     private void elegirIngredientes(Object tipo) {
@@ -360,7 +366,7 @@ public class FXMLDocumentController implements Initializable {
                 this.resumenTotal.setText(p.removeIngredienteExtra(this.sinIngredientes.getUserData().toString()));
             }
 
-            this.resumenIngredientes.setText("Ingredientes Extra: " + p.ingredientes());
+            this.resumenIngredientes.setText("Ingredientes Extra: " + p.ingredientesConDinero());
         }
     }
 
@@ -372,7 +378,8 @@ public class FXMLDocumentController implements Initializable {
 
     private void elegirTamaño(String tipo) {
         this.resumenTotal.setText(p.setTamaño(tipo));
-        this.resumenTamaño.setText("Tamaño de la pizza: " + tipo);
+        DecimalFormat formato = new DecimalFormat("00.00%");
+        this.resumenTamaño.setText(String.format("Tamaño de la pizza:   %-12s %9s", tipo,formato.format(Precios.tamaño.get(tipo)-1)));
     }
 
     private void renovarPedidos() {

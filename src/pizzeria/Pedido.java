@@ -35,24 +35,36 @@ import javafx.scene.layout.GridPane;
 public class Pedido {
 
     private List<Pizza> pizzas = new ArrayList<>();
-    private static int totalPedidos = 1;
+    private static int numPedidos = 1;
+    private int numPizzas = 0;
+    private double totalPedido = 0.0;
     
-    
-    public Pedido() {
-        Pizza.pizzas = 0; 
-        Pizza.totalPedido = 0;
+    public Pedido() {         
+        
     }
 
     public boolean generarTicket1(Path directorio) {
         return generarTicket(directorio);
     }
 
+    public double totalPedido(){
+        return this.totalPedido;
+    }
+    public void sumarPizza(double dinero){
+        this.totalPedido += dinero;
+    }
+    
+    public int numeroPizzas(){
+        this.numPizzas++;
+        return this.numPizzas;
+    }
+    
     public boolean generarTicket1() {
         return generarTicket(Paths.get(new File("").getAbsolutePath() + "\\tickets"));
     }
 
     private boolean generarTicket(Path directorio) {
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("'Ticket Nº'" + totalPedidos + "  'fecha' dd-mm-yyyy 'hora' HH-mm-ss");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("'Ticket Nº'" + numPedidos + "  'fecha' dd-mm-yyyy 'hora' HH-mm-ss");
         LocalDateTime nombre = LocalDateTime.now();
 
         Path archivo = Paths.get(directorio + "\\" + formato.format(nombre) + ".txt");
@@ -72,7 +84,8 @@ public class Pedido {
             }
             
             bw.newLine();
-            bw.append("Total:" +Pizza.getTotalPedido());
+            DecimalFormat formate = new DecimalFormat("00.00€");
+            bw.append("Total Pedido:" + formate.format(this.totalPedido));
             bw.newLine();
             
             
@@ -81,7 +94,7 @@ public class Pedido {
             alerta.setHeaderText("El ticket se ha genarado correctamente");
             alerta.setContentText("Ubicación del ticket: " + archivo.toAbsolutePath().toString());
             alerta.showAndWait();
-            totalPedidos++;
+            numPedidos++;
             return true;
 
         } catch (IOException ex) {

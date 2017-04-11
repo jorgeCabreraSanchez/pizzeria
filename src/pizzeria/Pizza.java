@@ -18,21 +18,20 @@ public class Pizza {
     private String tipoPizza = "";
     private Set<String> ingredientes = new HashSet<>();
     private String tamaño = "";
-    public static int pizzas = 0;
     private String infoPizza = "";
-    public static double totalPedido = 0.0;
+    private Pedido pedido;
 
-    public Pizza() {
-
+    public Pizza(Pedido ped) {
+        this.numero = ped.numeroPizzas();
+        this.pedido = ped;
     }
 
-    public static String getTotalPedido(){
+    public String getTotalPedido() {
         DecimalFormat formato = new DecimalFormat("00.00€");
-        return formato.format(Pizza.totalPedido);
+        return formato.format(pedido.totalPedido());
     }
-    
-    public String setInfoPizza() {
-        
+
+    public void setInfoPizza() {
         Double porcentaje = (Precios.tamaño.get(tamaño) - 1) * 100;
         this.infoPizza += String.format("Tipo de masa              %-12s \n"
                 + "Tipo de pizza:              %-12s  \n"
@@ -40,16 +39,11 @@ public class Pizza {
                 + "Tamaño de la pizza:    %-12s  \n"
                 + "Total: %32s€", tipoMasa, tipoPizza, ingredientes(), tamaño, getTotal());
         DecimalFormat formato = new DecimalFormat("00.00€");
-        return formato.format(Pizza.totalPedido += this.Total);        
+        pedido.sumarPizza(this.Total);
     }
 
     public String getInfoPizza() {
         return this.infoPizza;
-    }
-
-    public int numeroPizzas() {
-        Pizza.pizzas += 1;
-        return Pizza.pizzas;
     }
 
     public String getTipoMasa() {
@@ -213,9 +207,8 @@ public class Pizza {
         return formato.format(this.Total);
     }
 
-    public String infoTicket() {
-        
-        String extras = "",devolver = "";
+    public String ingredientesConDinero() {
+        String extras = "";
         int contador = 0;
         for (String ingrediente : ingredientes) {
             if (contador == 0) {
@@ -223,17 +216,22 @@ public class Pizza {
             } else {
                 extras += String.format("                      %-12s %8.2f  \n", ingrediente, Precios.ingredientesExtra.get(ingrediente));
             }
-
             contador++;
         }
+        return extras;
+    }
+
+    
+    public String infoTicket() {
+        String devolver = "";
         DecimalFormat formato = new DecimalFormat("0.00%");
-        Double porcentaje = Precios.tamaño.get(tamaño)-1;
+        Double porcentaje = Precios.tamaño.get(tamaño) - 1;
         devolver += String.format("Tipo de masa          %-12s %8.2f \n"
                 + "Tipo de pizza:        %-12s %8.2f \n"
                 + "Ingredientes Extra:   %-12s"
                 + "Tamaño de la pizza:   %-12s %9s \n"
-                + "Total: %36s€", tipoMasa, Precios.precioTipoMasa.get(tipoMasa), tipoPizza, Precios.tiposPizza.get(tipoPizza), extras, tamaño, formato.format(porcentaje), getTotal());
-    return devolver;
+                + "Total: %36s€", tipoMasa, Precios.precioTipoMasa.get(tipoMasa), tipoPizza, Precios.tiposPizza.get(tipoPizza), ingredientesConDinero(), tamaño, formato.format(porcentaje), getTotal());
+        return devolver;
     }
 
 }

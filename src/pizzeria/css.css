@@ -115,3 +115,13 @@ and open the template in the editor.
     -fx-border-color: #7990e7;
     -fx-border-width: 2px;
 }
+#resumenTipoPizza{
+    -fx-padding: 5px;
+}
+#resumenIngredientes{
+    -fx-padding: 5px;
+}
+#resumenTamaño{
+    -fx-padding: 5px;
+}
+
